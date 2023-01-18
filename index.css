@@ -28,3 +28,7 @@ code {
 .nav-intensidad:hoover{
   font-weight: bold;
 }
+
+.precio {
+  font-weight: bold;
+}
