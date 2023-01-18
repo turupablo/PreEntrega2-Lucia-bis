@@ -8,12 +8,11 @@ const Main = () => {
 
     return (
         <main>
-                <ItemListContainer greeting="Proximamente tus productos favoritos" />
+                
             <Routes>
-                <Route path={mainPath} element={<ItemListContainer />} />
-                <Route path={mainPath + "/productos/:categoria"} element={<ItemListContainer render="categoria"/>} />
+                <Route path="/" element={<ItemListContainer/>}/>
+                <Route path="/category/:categoria" element={<ItemListContainer/>}/>
                 <Route path="/item/:currentId" element={<ItemListContainer render="detalle" />} />
-
                 <Route path="*" element={<Error />} />
             </Routes>
 
