@@ -7,12 +7,16 @@ const ItemListContainer = () => {
     const [load, setLoad] = useState(false)
     const [productos,setProductos] = useState([])
 
+    const props = useParams()
+    const categoria = props.categoria
+    console.log(props)
+
 
     useEffect(() => {
 
-
-        const pedido = fetch("https://fakestoreapi.com/products")
-
+        setLoad(false)
+        const pedido = fetch("https://fakestoreapi.com/products/")
+        
         pedido
             .then((respuesta) => {
                 const productos = respuesta.json()
@@ -20,18 +24,23 @@ const ItemListContainer = () => {
 
             })
             .then((productos) => {
-                setProductos(productos)
-                setLoad(true)
+                if (props.categoria == null) {
+                    setProductos(productos)
+                } else {
+                    setProductos(productos.filter(p => p.category === props.categoria))
+                }
+            setLoad(true)
+
             })
             .catch((error) => {
                 console.log(error)
             })
 
-    }, [])
+    }, [props.categoria])
 
     return (
         <>
-            {load ? null : 'Cargando...'}
+            {load ? null : <div className="text-center text-warning">Cargando</div>}
             <ItemList productos={productos}/>
         </>
     )
